@@ -7,11 +7,17 @@ const productSchema = Schema(
       require: true,
     },
     price: {
-      type: Boolean,
+      type: Number,
       require: true,
     },
+    category_id: {
+      type: Schema.Types.ObjectId,
+      ref: "categories",
+    },
   },
-  {timestamps: true}
+  {
+    timestamps: true,
+  }
 );
 
 export default mongoose.model("products", productSchema);

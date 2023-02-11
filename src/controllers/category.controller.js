@@ -1,13 +1,11 @@
 import categoryModel from "../models/category.model.js";
-import productModel from "../models/product.model.js";
-import {getAll} from "../services/product.service.js";
 
-export const getProducts = async (req, res) => {
+export const getCategories = async (req, res) => {
   try {
-    const products = await getAll();
+    const categories = await categoryModel.find();
     return res.status(200).json({
       status: 200,
-      data: products,
+      data: categories,
       error: null,
     });
   } catch (error) {
@@ -19,13 +17,13 @@ export const getProducts = async (req, res) => {
   }
 };
 
-export const getProductById = async (req, res) => {
+export const getCategoryById = async (req, res) => {
   try {
     const {id} = req.params;
-    const product = await categoryModel.findById(id);
+    const category = await categoryModel.findById(id);
     return res.status(200).json({
       status: 200,
-      data: product,
+      data: category,
       error: null,
     });
   } catch (error) {
@@ -37,13 +35,13 @@ export const getProductById = async (req, res) => {
   }
 };
 
-export const createProduct = async (req, res) => {
+export const createCategory = async (req, res) => {
   try {
-    const product = new productModel(req.body);
+    const product = new categoryModel(req.body);
     await product.save();
     return res.status(200).json({
       status: 200,
-      message: "create product success",
+      message: "create category success",
     });
   } catch (error) {
     return res.status(200).json({
